@@ -30,18 +30,25 @@
         {
             Domain.Validation.DomainExceptionValidation.When(string.IsNullOrEmpty(name),
                 "Invalid name. Name is required");
+
             Domain.Validation.DomainExceptionValidation.When(name.Length < 3,
                 "Invalid name, too short, minimum 3 characters");
+
             Domain.Validation.DomainExceptionValidation.When(string.IsNullOrEmpty(description),
                 "Invalid description. Description is required");
+
             Domain.Validation.DomainExceptionValidation.When(description.Length < 5,
                 "Invalid description, too short, minimum 5 characters");
+
             Domain.Validation.DomainExceptionValidation.When(price < 0,
                 "Invalid price value");
+
             Domain.Validation.DomainExceptionValidation.When(stock < 0,
                 "Invalid stock value");
+
             Domain.Validation.DomainExceptionValidation.When(image?.Length > 250,
                 "Invalid image name, too long, maximum 250 characters");
+
             Name = name;
             Description = description;
             Price = price;
