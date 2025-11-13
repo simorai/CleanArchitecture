@@ -48,7 +48,7 @@ namespace CleanArchMvc.Domain.Tests
         {
             Action action = () => new Product(1, "Product Name", "Product Description", 9.99m, 99, null);
             action.Should()
-                 .NotThrow<CleanArchMvc.Domain.Validation.DomainExceptionValidation>();
+                 .NotThrow<NullReferenceException>();
         }
 
         [Fact]
