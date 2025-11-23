@@ -1,3 +1,5 @@
+using CleanArchMvc.Infra.Ioc;
+
 namespace CleanArchMvc.WebUi
 {
     public class Program
@@ -8,6 +10,9 @@ namespace CleanArchMvc.WebUi
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Register infrastructure services
+            builder.Services.AddInfrastruture(builder.Configuration);
 
             var app = builder.Build();
 
