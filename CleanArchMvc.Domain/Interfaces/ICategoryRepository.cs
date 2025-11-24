@@ -15,7 +15,7 @@ namespace CleanArchMvc.Domain.Interfaces
         /// </returns>
         //Task<IEnumerable<Category>> GetCategoriesAsync();
 
-        Task<IEnumerable<Category>> GetCatories();
+        Task<IEnumerable<Category>> GetCategories();
         Task<Category> GetById(int? id);
 
         Task<Category> Create(Category category);
