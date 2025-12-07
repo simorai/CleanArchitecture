@@ -5,16 +5,8 @@ namespace CleanArchMvc.Domain.Interfaces
     /// <summary>
     /// Defines a repository interface for <see cref="Category"/> entities, including domain-specific queries.
     /// </summary>
-    public interface ICategoryRepository /*: IGenericRepository<Category>*/
+    public interface ICategoryRepository
     {
-        /// <summary>
-        /// Asynchronously retrieves all categories.
-        /// </summary>
-        /// <returns>
-        /// A task that represents the asynchronous operation. The task result contains an enumerable of categories.
-        /// </returns>
-        //Task<IEnumerable<Category>> GetCategoriesAsync();
-
         Task<IEnumerable<Category>> GetCategories();
         Task<Category> GetById(int? id);
 
