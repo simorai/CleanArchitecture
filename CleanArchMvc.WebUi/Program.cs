@@ -31,9 +31,10 @@ namespace CleanArchMvc.WebUi
 
             app.UseAuthorization();
 
+            // Set up default route for MVC controllers
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Categories}/{action=Index}/{id?}");
+                pattern: "{controller=Products}/{action=Index}/{id?}");
 
             app.Run();
         }
