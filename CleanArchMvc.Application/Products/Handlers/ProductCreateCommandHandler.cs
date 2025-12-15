@@ -5,13 +5,31 @@ using MediatR;
 
 namespace CleanArchMvc.Application.Products.Handlers
 {
+    /// <summary>
+    /// Handles the creation of a new product using the <see cref="ProductCreateCommand"/>.
+    /// </summary>
     public class ProductCreateCommandHandler : IRequestHandler<ProductCreateCommand, Product>
     {
         private readonly IProductRepository _productRepository;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProductCreateCommandHandler"/> class.
+        /// </summary>
+        /// <param name="productRepository">The product repository to access product data.</param>
         public ProductCreateCommandHandler(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
+
+        /// <summary>
+        /// Handles the request to create a new product.
+        /// </summary>
+        /// <param name="request">The command containing the product data to create.</param>
+        /// <param name="cancellationToken">A cancellation token for the async operation.</param>
+        /// <returns>
+        /// A task that represents the asynchronous operation. The task result contains the created product.
+        /// </returns>
+        /// <exception cref="ApplicationException">Thrown when there is an error creating the product entity.</exception>
         public async Task<Product> Handle(ProductCreateCommand request,
             CancellationToken cancellationToken)
         {

@@ -36,6 +36,9 @@ namespace CleanArchMvc.Infra.Ioc
             // Modern AutoMapper registration: scan the assembly for profiles
             services.AddAutoMapper(typeof(DomainToDTOMappingProfile).Assembly);
 
+            var myHandlers = AppDomain.CurrentDomain.Load("CleanArchMvc.Application");
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(myHandlers));
+
             return services;
         }
     }
