@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CleanArchMvc.Application.DTOs;
 using CleanArchMvc.Application.Interfaces;
+using CleanArchMvc.Application.Products.Commands;
 using CleanArchMvc.Application.Products.Queries;
 using MediatR;
 
@@ -35,8 +36,6 @@ namespace CleanArchMvc.Application.Services
         /// <returns>A task that represents the asynchronous operation. The task result contains an enumerable of <see cref="ProductDTO"/>.</returns>
         public async Task<IEnumerable<ProductDTO>> GetProducts()
         {
-            //var productsEntity = await _productRepository.GetProductsAsync();
-            //return _mapper.Map<IEnumerable<ProductDTO>>(productsEntity);
             var productsQuery = new GetProductsQuery();
             if (productsQuery == null)
             {
@@ -47,59 +46,52 @@ namespace CleanArchMvc.Application.Services
 
         }
 
-        ///// <summary>
-        ///// Retrieves a product by its identifier asynchronously.
-        ///// </summary>
-        ///// <param name="id">The product identifier.</param>
-        ///// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="ProductDTO"/> if found; otherwise, null.</returns>
-        //public async Task<ProductDTO> GetById(int? id)
-        //{
-        //    var productEntity = await _productRepository.GetByIdAsync(id);
-        //    return _mapper.Map<ProductDTO>(productEntity);
-        //}
 
-        ///// <summary>
-        ///// Retrieves a product along with its category by product identifier asynchronously.
-        ///// </summary>
-        ///// <param name="id">The product identifier.</param>
-        ///// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="ProductDTO"/> with category information if found; otherwise, null.</returns>
-        //public async Task<ProductDTO> GetProductCategory(int? id)
-        //{
-        //    var productEntity = await _productRepository.GetProductCategoryAsync(id);
-        //    return _mapper.Map<ProductDTO>(productEntity);
-        //}
+        public async Task<ProductDTO> GetById(int? id)
+        {
+            var productByIdQuery = new GetProductByIdQuery(id.Value);
+            if (productByIdQuery == null)
+            {
+                throw new Exception($"Entity could not be loaded");
+            }
+            var result = await _mediator.Send(productByIdQuery);
+            return _mapper.Map<ProductDTO>(result);
+        }
 
-        ///// <summary>
-        ///// Adds a new product asynchronously.
-        ///// </summary>
-        ///// <param name="productDto">The product DTO to add.</param>
-        ///// <returns>A task that represents the asynchronous operation.</returns>
-        //public async Task Add(ProductDTO productDto)
-        //{
-        //    var productEntity = _mapper.Map<Product>(productDto);
-        //    await _productRepository.CreateAsync(productEntity);
-        //}
 
-        ///// <summary>
-        ///// Updates an existing product asynchronously.
-        ///// </summary>
-        ///// <param name="productDto">The product DTO with updated information.</param>
-        ///// <returns>A task that represents the asynchronous operation.</returns>
-        //public async Task Update(ProductDTO productDto)
-        //{
-        //    var productEntity = _mapper.Map<Product>(productDto);
-        //    await _productRepository.UpdateAsync(productEntity);
-        //}
+        public async Task<ProductDTO> GetProductCategory(int? id)
+        {
+            var productByIdQuery = new GetProductByIdQuery(id.Value);
+            if (productByIdQuery == null)
+            {
+                throw new Exception($"Entity could not be loaded");
+            }
+            var result = await _mediator.Send(productByIdQuery);
+            return _mapper.Map<ProductDTO>(result);
 
-        ///// <summary>
-        ///// Removes a product by its identifier asynchronously.
-        ///// </summary>
-        ///// <param name="id">The product identifier.</param>
-        ///// <returns>A task that represents the asynchronous operation.</returns>
-        //public async Task Remove(int? id)
-        //{
-        //    var productEntity = _productRepository.GetByIdAsync(id).Result;
-        //    await _productRepository.RemoveAsync(productEntity);
-        //}
+        }
+
+
+        public async Task Add(ProductDTO productDto)
+        {
+            var productCreateCommand = _mapper.Map<ProductCreateCommand>(productDto);
+            await _mediator.Send(productCreateCommand);
+        }
+
+        public async Task Update(ProductDTO productDto)
+        {
+            var productUpdateCommand = _mapper.Map<ProductUpdateCommand>(productDto);
+            await _mediator.Send(productUpdateCommand);
+        }
+
+        public async Task Remove(int? id)
+        {
+            var productRemoveCommand = new ProductRemoveCommand(id.Value);
+            if (productRemoveCommand == null)
+            {
+                throw new Exception($"Entity could not be loaded");
+            }
+            await _mediator.Send(productRemoveCommand);
+        }
     }
 }
