@@ -13,5 +13,10 @@ namespace CleanArchMvc.WebUi.Controllers
         {
             return View();
         }
+
+        public IActionResult About()
+        {
+            return View();
+        }
     }
 }

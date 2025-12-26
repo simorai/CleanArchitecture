@@ -11,14 +11,18 @@ namespace CleanArchMvc.Application.Products.Handlers
     public class ProductCreateCommandHandler : IRequestHandler<ProductCreateCommand, Product>
     {
         private readonly IProductRepository _productRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductCreateCommandHandler"/> class.
         /// </summary>
         /// <param name="productRepository">The product repository to access product data.</param>
-        public ProductCreateCommandHandler(IProductRepository productRepository)
+        public ProductCreateCommandHandler(
+            IProductRepository productRepository,
+            ICategoryRepository categoryRepository)
         {
             _productRepository = productRepository;
+            _categoryRepository = categoryRepository;
         }
 
         /// <summary>
@@ -30,8 +34,7 @@ namespace CleanArchMvc.Application.Products.Handlers
         /// A task that represents the asynchronous operation. The task result contains the created product.
         /// </returns>
         /// <exception cref="ApplicationException">Thrown when there is an error creating the product entity.</exception>
-        public async Task<Product> Handle(ProductCreateCommand request,
-            CancellationToken cancellationToken)
+        public async Task<Product> Handle(ProductCreateCommand request, CancellationToken cancellationToken)
         {
             var product = new Product(request.Name, request.Description, request.Price,
                               request.Stock, request.Image);

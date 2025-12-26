@@ -7,6 +7,7 @@ namespace CleanArchMvc.WebUi.Controllers
     public class CategoriesController : Controller
     {
         private readonly ICategoryService _categoryService;
+
         public CategoriesController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
@@ -92,9 +93,5 @@ namespace CleanArchMvc.WebUi.Controllers
             if (categoryDto == null) return NotFound();
             return View(categoryDto);
         }
-
-
-
-
     }
 }

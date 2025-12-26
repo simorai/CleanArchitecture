@@ -120,6 +120,6 @@
         /// <summary>
         /// Gets or sets the category associated with the product.
         /// </summary>
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
     }
 }

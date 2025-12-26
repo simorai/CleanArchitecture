@@ -1,1 +1,29 @@
-﻿<h3>Products catalog</h3>
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<h3>Products Catalog</h3>
+<hr />
+<p>
+    <strong>Welcome to CleanArchMvc.WebUi!</strong> This project is structured using several proven software design patterns to ensure code quality, maintainability, and scalability:
+</p>
+<ul>
+    <li>
+        <strong>Domain-Driven Design (DDD):</strong> Separates business logic from infrastructure and UI, focusing on the core domain.
+    </li>
+    <li>
+        <strong>Repository Pattern:</strong> Abstracts data access, making it easier to manage and test data operations.
+    </li>
+    <li>
+        <strong>Service Layer Pattern:</strong> Encapsulates business logic in services, keeping controllers and UI code clean.
+    </li>
+    <li>
+        <strong>DTOs (Data Transfer Objects):</strong> Used to transfer data between layers, improving security and performance.
+    </li>
+    <li>
+        <strong>Dependency Injection:</strong> Promotes loose coupling and testability by injecting dependencies.
+    </li>
+</ul>
+<p>
+    Explore the <a asp-controller="Categories" asp-action="Index">Categories</a> and <a asp-controller="Products" asp-action="Index">Products</a> sections to see these patterns in action.
+</p>
