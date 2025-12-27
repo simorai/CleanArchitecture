@@ -1,3 +1,4 @@
+using CleanArchMvc.Domain.Account;
 using CleanArchMvc.Infra.Ioc;
 
 namespace CleanArchMvc.WebUi
@@ -16,6 +17,14 @@ namespace CleanArchMvc.WebUi
 
             var app = builder.Build();
 
+            // Seed roles and users
+            using (var scope = app.Services.CreateScope())
+            {
+                var seedUserRoleInitial = scope.ServiceProvider.GetRequiredService<ISeedUserRoleInitial>();
+                seedUserRoleInitial.SeedRoles();
+                seedUserRoleInitial.SeedUsers();
+            }
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -26,9 +35,10 @@ namespace CleanArchMvc.WebUi
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
+            // Enable authentication and authorization middleware
+            app.UseAuthentication();
             app.UseAuthorization();
 
             // Set up default route for MVC controllers
