@@ -15,6 +15,7 @@ namespace CleanArchMvc.Infra.Data.Identity
             _userManager = userManager;
         }
 
+        // Create default users and roles
         public void SeedUsers()
         {
             if (_userManager.FindByEmailAsync("user@localhost").Result == null)
@@ -36,6 +37,7 @@ namespace CleanArchMvc.Infra.Data.Identity
                 }
             }
 
+            // Create Admin user
             if (_userManager.FindByEmailAsync("admin@localhost").Result == null)
             {
                 ApplicationUser user = new ApplicationUser();
@@ -57,7 +59,7 @@ namespace CleanArchMvc.Infra.Data.Identity
 
         }
 
-
+        // Create default roles
         public void SeedRoles()
         {
             if (!_roleManager.RoleExistsAsync("User").Result)
