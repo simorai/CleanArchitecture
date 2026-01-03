@@ -25,7 +25,7 @@ namespace CleanArchMvc.API
             }
 
             app.UseHttpsRedirection();
-
+            app.UseStatusCodePages(); // Enable status code pages for better error handling
             // correct order of middleware to handle authentication and authorization
             app.UseAuthentication();// Enable authentication middleware
             app.UseAuthorization(); // Enable authorization middleware
