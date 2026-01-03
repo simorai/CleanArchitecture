@@ -8,8 +8,6 @@ namespace CleanArchMvc.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer(); // Register endpoints explorer
@@ -28,7 +26,9 @@ namespace CleanArchMvc.API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            // correct order of middleware to handle authentication and authorization
+            app.UseAuthentication();// Enable authentication middleware
+            app.UseAuthorization(); // Enable authorization middleware
 
 
             app.MapControllers();
