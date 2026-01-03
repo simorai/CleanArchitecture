@@ -11,9 +11,9 @@ namespace CleanArchMvc.API
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer(); // Register endpoints explorer
-            builder.Services.AddSwaggerGen(); // Register Swagger services
-            builder.Services.AddInfrastrutureAPI(builder.Configuration); // Register infrastructure services
-            builder.Services.AddInfrastructureJWT(builder.Configuration); // Register JWT services
+            builder.Services.AddInfrastrutureAPI(builder.Configuration); // Register infrastructure services through extension method
+            builder.Services.AddInfrastructureJWT(builder.Configuration); // Register JWT services through extension method
+            builder.Services.AddInfrastructureSwagger(); // Register Swagger services through extension method
 
             var app = builder.Build();
 
